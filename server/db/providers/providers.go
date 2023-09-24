@@ -20,6 +20,8 @@ type Provider interface {
 	GetUserByEmail(ctx context.Context, email string) (*models.User, error)
 	// GetUserByPhoneNumber to get user information from database using phone number
 	GetUserByPhoneNumber(ctx context.Context, phoneNumber string) (*models.User, error)
+	// GetUserByNickname to get user information from the database using the Nickname
+	GetUserByNickname(ctx context.Context, nickname string) (*models.User, error)
 	// GetUserByID to get user information from database using user ID
 	GetUserByID(ctx context.Context, id string) (*models.User, error)
 	// UpdateUsers to update multiple users, with parameters of user IDs slice
