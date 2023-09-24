@@ -22,7 +22,7 @@ type User struct {
 	GivenName                *string `json:"given_name" bson:"given_name" cql:"given_name" dynamo:"given_name"`
 	FamilyName               *string `json:"family_name" bson:"family_name" cql:"family_name" dynamo:"family_name"`
 	MiddleName               *string `json:"middle_name" bson:"middle_name" cql:"middle_name" dynamo:"middle_name"`
-	Nickname                 *string `json:"nickname" bson:"nickname" cql:"nickname" dynamo:"nickname"`
+	Nickname                 *string `gorm:"unique; not null" json:"nickname" bson:"nickname" cql:"nickname" dynamo:"nickname"`
 	Gender                   *string `json:"gender" bson:"gender" cql:"gender" dynamo:"gender"`
 	Birthdate                *string `json:"birthdate" bson:"birthdate" cql:"birthdate" dynamo:"birthdate"`
 	PhoneNumber              *string `gorm:"index" json:"phone_number" bson:"phone_number" cql:"phone_number" dynamo:"phone_number"`
