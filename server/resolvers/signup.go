@@ -67,6 +67,24 @@ func SignupResolver(ctx context.Context, params model.SignUpInput) (*model.AuthR
 		return res, err
 	}
 
+	// check that the nickname isn't nil, and that it it's not already taken
+	if params.Nickname == nil {
+		log.Debug("Nickname is required")
+		return res, fmt.Errorf(`nickname is required`)
+	}
+
+	// check that the nickname isn't nil, and that it it's not already taken
+	existingUserNickname, err := db.Provider.GetUserByNickname(ctx, *params.Nickname)
+	if err != nil {
+		log.Debug("Failed to get user by nickname: ", err)
+	}
+
+	if existingUserNickname.Nickname != nil {
+		log.Debug("Nickname is already taken")
+		return res, fmt.Errorf(`nickname %s is already taken`, *params.Nickname)
+	}
+
+	// check that the email isn't nil, and that it it's not already taken
 	params.Email = strings.ToLower(params.Email)
 
 	if !validators.IsValidEmail(params.Email) {
