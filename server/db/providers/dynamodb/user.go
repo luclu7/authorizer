@@ -130,6 +130,23 @@ func (p *provider) GetUserByEmail(ctx context.Context, email string) (*models.Us
 	}
 }
 
+// GetUserByNickname to get user information from database using nickname
+func (p *provider) GetUserByNickname(ctx context.Context, nickname string) (*models.User, error) {
+	var users []*models.User
+	var user *models.User
+	collection := p.db.Table(models.Collections.User)
+	err := collection.Scan().Index("nickname").Filter("'nickname' = ?", nickname).AllWithContext(ctx, &users)
+	if err != nil {
+		return user, nil
+	}
+	if len(users) > 0 {
+		user = users[0]
+		return user, nil
+	} else {
+		return user, errors.New("no record found")
+	}
+}
+
 // GetUserByID to get user information from database using user ID
 func (p *provider) GetUserByID(ctx context.Context, id string) (*models.User, error) {
 	collection := p.db.Table(models.Collections.User)

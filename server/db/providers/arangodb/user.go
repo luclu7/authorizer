@@ -143,6 +143,33 @@ func (p *provider) GetUserByEmail(ctx context.Context, email string) (*models.Us
 	return user, nil
 }
 
+// GetUserByNickname to get user information from database using nickname
+func (p *provider) GetUserByNickname(ctx context.Context, nickname string) (*models.User, error) {
+	var user *models.User
+	query := fmt.Sprintf("FOR d in %s FILTER d.nickname == @nickname RETURN d", models.Collections.User)
+	bindVars := map[string]interface{}{
+		"nickname": nickname,
+	}
+	cursor, err := p.db.Query(ctx, query, bindVars)
+	if err != nil {
+		return user, err
+	}
+	defer cursor.Close()
+	for {
+		if !cursor.HasMore() {
+			if user == nil {
+				return user, fmt.Errorf("user not found")
+			}
+			break
+		}
+		_, err := cursor.ReadDocument(ctx, &user)
+		if err != nil {
+			return user, err
+		}
+	}
+	return user, nil
+}
+
 // GetUserByID to get user information from database using user ID
 func (p *provider) GetUserByID(ctx context.Context, id string) (*models.User, error) {
 	var user *models.User

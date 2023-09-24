@@ -118,6 +118,17 @@ func (p *provider) GetUserByEmail(ctx context.Context, email string) (*models.Us
 	return user, nil
 }
 
+// GetUserByNickname to get user information from database using nickname
+func (p *provider) GetUserByNickname(ctx context.Context, nickname string) (*models.User, error) {
+	var user *models.User
+	result := p.db.Where("nickname = ?", nickname).First(&user)
+	if result.Error != nil {
+		fmt.Printf("error: %v\n", result.Error)
+		return user, result.Error
+	}
+	return user, nil
+}
+
 // GetUserByID to get user information from database using user ID
 func (p *provider) GetUserByID(ctx context.Context, id string) (*models.User, error) {
 	var user *models.User

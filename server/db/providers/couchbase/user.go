@@ -119,6 +119,25 @@ func (p *provider) GetUserByEmail(ctx context.Context, email string) (*models.Us
 	return user, nil
 }
 
+// GetUserByNickname to get user information from database using nickname
+func (p *provider) GetUserByNickname(ctx context.Context, nickname string) (*models.User, error) {
+	var user *models.User
+	query := fmt.Sprintf("SELECT _id, email, email_verified_at, `password`, signup_methods, given_name, family_name, middle_name, nickname, birthdate, phone_number, phone_number_verified_at, picture, roles, revoked_timestamp, is_multi_factor_auth_enabled, created_at, updated_at FROM %s.%s WHERE nickname = $1 LIMIT 1", p.scopeName, models.Collections.User)
+	q, err := p.db.Query(query, &gocb.QueryOptions{
+		ScanConsistency:      gocb.QueryScanConsistencyRequestPlus,
+		Context:              ctx,
+		PositionalParameters: []interface{}{nickname},
+	})
+	if err != nil {
+		return user, err
+	}
+	err = q.One(&user)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
+
 // GetUserByID to get user information from database using user ID
 func (p *provider) GetUserByID(ctx context.Context, id string) (*models.User, error) {
 	var user *models.User
