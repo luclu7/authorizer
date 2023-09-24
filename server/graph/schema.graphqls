@@ -334,7 +334,7 @@ input SignUpInput {
   given_name: String
   family_name: String
   middle_name: String
-  nickname: String
+  nickname: String!
   gender: String
   birthdate: String
   phone_number: String
