@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { AuthorizerResetPassword } from '@authorizerdev/authorizer-react';
+import { AuthorizerResetPassword } from '@luclu7/authorizer-react';
 
 export default function ResetPassword() {
 	return (

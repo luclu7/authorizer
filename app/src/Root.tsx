@@ -1,6 +1,6 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useAuthorizer } from '@authorizerdev/authorizer-react';
+import { useAuthorizer } from '@luclu7/authorizer-react';
 import styled, { ThemeProvider } from 'styled-components';
 import SetupPassword from './pages/setup-password';
 import { hasWindow, createRandomString } from './utils/common';

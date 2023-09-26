@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthorizerProvider } from '@authorizerdev/authorizer-react';
+import { AuthorizerProvider } from '@luclu7/authorizer-react';
 import Root from './Root';
 import { createRandomString } from './utils/common';
 

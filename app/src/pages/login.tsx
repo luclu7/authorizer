@@ -5,7 +5,7 @@ import {
 	AuthorizerMagicLinkLogin,
 	AuthorizerSocialLogin,
 	useAuthorizer,
-} from '@authorizerdev/authorizer-react';
+} from '@luclu7/authorizer-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 

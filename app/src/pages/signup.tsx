@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { AuthorizerSignup } from '@authorizerdev/authorizer-react';
+import { AuthorizerSignup } from '@luclu7/authorizer-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
