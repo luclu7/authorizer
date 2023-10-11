@@ -47,7 +47,7 @@ func AppHandler() gin.HandlerFunc {
 			// validate redirect url with allowed origins
 			if !validators.IsValidOrigin(redirectURI) {
 				log.Debug("Invalid redirect_uri")
-				c.JSON(400, gin.H{"error": "invalid redirect url"})
+				c.JSON(400, gin.H{"error": "redirect url is not in the allowed origins list"})
 				return
 			}
 		}
